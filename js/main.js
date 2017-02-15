@@ -62,9 +62,7 @@ jQuery(document).ready(function($) {
         $(this).find(".icon_menu").removeClass("icon_menu_hover");
     });
 
-    /* ---------------------------------------------------------------------- */
     /* --------------------------- Scroll tabs ------------------------------ */
-    /* ---------------------------------------------------------------------- */
 
     $(".content_2").mCustomScrollbar({
         theme: "dark-2",
@@ -75,11 +73,7 @@ jQuery(document).ready(function($) {
             autoScrollOnFocus: false
         }
     });
-
-    /* ---------------------------------------------------------------------- */
     /* ------------------------- Effect tabs -------------------------------- */
-    /* ---------------------------------------------------------------------- */
-
     var animation_style = 'bounceIn';
 
     $('.dropdown-select').change(function() {
@@ -107,14 +101,7 @@ jQuery(document).ready(function($) {
             }
         });
 
-        if (tab_name == "contact")
-            initialize();
-
         return false;
-    });
-
-    $("#verticalTab h2.resp-accordion").click(function() {
-        initialize();
     });
 
     /* ---------------------------------------------------------------------- */
@@ -150,13 +137,7 @@ jQuery(document).ready(function($) {
     window.addEventListener('load', redimensionnement, false);
     window.addEventListener('resize', redimensionnement, false);
 
-    $("#verticalTab h2.resp-accordion").click(function() {
-        initialize();
-    });
-
-    /* ---------------------------------------------------------------------- */
     /* -------------------------- Contact Form ------------------------------ */
-    /* ---------------------------------------------------------------------- */
 
     // Needed variables
     var $contactform = $('#contactform'),
