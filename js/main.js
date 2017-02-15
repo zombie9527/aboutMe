@@ -73,36 +73,6 @@ jQuery(document).ready(function($) {
             autoScrollOnFocus: false
         }
     });
-    /* ------------------------- Effect tabs -------------------------------- */
-    var animation_style = 'bounceIn';
-
-    $('.dropdown-select').change(function() {
-        animation_style = $('.dropdown-select').val();
-    });
-
-
-    $('ul.resp-tabs-list li[class^=tabs-]').click(function() {
-
-        var tab_name = $(this).attr('data-tab-name');
-
-        $('.resp-tabs-container').addClass('animated ' + animation_style);
-        $('.resp-tabs-container').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-            $('.resp-tabs-container').removeClass('animated ' + animation_style);
-        });
-
-        $(".content_2").mCustomScrollbar("destroy");
-        $(".content_2").mCustomScrollbar({
-            theme: "dark-2",
-            contentTouchScroll: true,
-            advanced: {
-                updateOnContentResize: true,
-                updateOnBrowserResize: true,
-                autoScrollOnFocus: false
-            }
-        });
-
-        return false;
-    });
 
     /* ---------------------------------------------------------------------- */
     /* ---------------------- redimensionnement ----------------------------- */
@@ -136,83 +106,6 @@ jQuery(document).ready(function($) {
     // On lie l'événement resize à la fonction
     window.addEventListener('load', redimensionnement, false);
     window.addEventListener('resize', redimensionnement, false);
-
-    /* -------------------------- Contact Form ------------------------------ */
-
-    // Needed variables
-    var $contactform = $('#contactform'),
-            $success = ' Your message has been sent. Thank you!';
-
-    $contactform.submit(function() {
-        $.ajax({
-            type: "POST",
-            url: "php/contact.php",
-            data: $(this).serialize(),
-            success: function(msg)
-            {
-                var msg_error = msg.split(",");
-                var output_error = '';
-
-                if (msg_error.indexOf('error-message') != -1) {
-                    $("#contact-message").addClass("has-error");
-                    $("#contact-message").removeClass("has-success");
-                    output_error = 'Please enter your message.';
-                } else {
-                    $("#contact-message").addClass("has-success");
-                    $("#contact-message").removeClass("has-error");
-                }
-
-                if (msg_error.indexOf('error-email') != -1) {
-
-                    $("#contact-email").addClass("has-error");
-                    $("#contact-email").removeClass("has-success");
-                    output_error = 'Please enter valid e-mail.';
-                } else {
-                    $("#contact-email").addClass("has-success");
-                    $("#contact-email").removeClass("has-error");
-                }
-
-                if (msg_error.indexOf('error-name') != -1) {
-                    $("#contact-name").addClass("has-error");
-                    $("#contact-name").removeClass("has-success");
-                    output_error = 'Please enter your name.';
-                } else {
-                    $("#contact-name").addClass("has-success");
-                    $("#contact-name").removeClass("has-error");
-                }
-
-
-                if (msg == 'success') {
-
-                    response = '<div class="alert alert-success success-send">' +
-                            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
-                            '<i class="glyphicon glyphicon-ok" style="margin-right: 5px;"></i> ' + $success
-                            + '</div>';
-
-
-                    $(".reset").trigger('click');
-                    $("#contact-name").removeClass("has-success");
-                    $("#contact-email").removeClass("has-success");
-                    $("#contact-message").removeClass("has-success");
-
-                } else {
-
-                    response = '<div class="alert alert-danger error-send">' +
-                            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
-                            '<i class="glyphicon glyphicon-remove" style="margin-right: 5px;"></i> ' + output_error
-                            + '</div>';
-
-                }
-                // Hide any previous response text
-                $(".error-send,.success-send").remove();
-                // Show response message
-                $contactform.prepend(response);
-            }
-        });
-        return false;
-    });
-
-
 
     /* ---------------------------------------------------------------------- */
     /* ---------------------------- icon menu ------------------------------- */
@@ -274,22 +167,4 @@ jQuery(document).ready(function($) {
         });
     });
 	
-		
-	//Change for demo page
-    $('input:radio[name=page_builder]').on('change', function() {
-		
-		$('input:radio[name=page_builder]').each(function () {
-
-			var $this = $(this);
-	
-			if ($(this).prop('checked')) {
-				window.location.replace($this.val());
-			}
-		});
-		
-        return false;
-    });
-
-
-
 });
